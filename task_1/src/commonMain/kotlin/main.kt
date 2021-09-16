@@ -1,13 +1,13 @@
-fun main(args : Array<String>) {
+fun main() {
 
     val text =
-        "Lorem ipLorem ipLorem ipLorem ipLorem ipLorem ip"
+        "avada ke"
 
     require(text.encodeToByteArray().size % Long.SIZE_BYTES == 0)
 
-    val key = "12345678"
+    val key = "arvadek adava arvadek adava arva"
 
-    val des = DES(key.encodeToByteArray())
+    val des = GOST(key.encodeToByteArray())
 
     val encrypted = des.encrypt(text.encodeToByteArray())
 

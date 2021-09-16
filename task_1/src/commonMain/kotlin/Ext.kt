@@ -1,16 +1,5 @@
-//fun ByteArray.joinToLongs() = asSequence()
-//    .chunked(DES_BLOCK_SIZE_BYTES) {
-//        it.toByteArray().jointToLong()
-//    }
-//    .toList()
-//
-//fun ByteArray.jointToLong() : Long {
-//    require(size == Long.SIZE_BYTES)
-//
-//}
-
-fun ByteArray.toBits() = asSequence()
-    .chunked(DES_BLOCK_SIZE_BYTES) {
+fun ByteArray.toBits(groupSize : Int) = asSequence()
+    .chunked(groupSize) {
         it.flatMap(Byte::toBits).toBooleanArray()
     }
     .toList()

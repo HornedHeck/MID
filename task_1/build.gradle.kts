@@ -11,6 +11,11 @@ kotlin {
     jvm {
         withJava()
     }
+    linuxX64{
+        binaries{
+            executable()
+        }
+    }
 }
 kotlin {
     /* Targets configuration omitted.
@@ -29,17 +34,6 @@ kotlin {
                 dependencies {
                     implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
                     implementation("org.jetbrains.kotlin:kotlin-test-common")
-                }
-            }
-            val jvmTest by getting {
-                dependencies {
-                    implementation("org.jetbrains.kotlin:kotlin-test-junit")
-                }
-            }
-
-            val jsTest by getting {
-                dependencies {
-                    implementation("org.jetbrains.kotlin:kotlin-test-js")
                 }
             }
         }

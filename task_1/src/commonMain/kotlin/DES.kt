@@ -20,7 +20,7 @@ class DES(
     }
 
     fun encrypt(data : ByteArray) : ByteArray {
-        return data.toBits().flatMap {
+        return data.toBits(DES_BLOCK_SIZE_BYTES).flatMap {
             encryptBlock(BitSet(it)).toBytes()
         }.toByteArray()
     }
@@ -36,7 +36,7 @@ class DES(
     }
 
     fun decrypt(data : ByteArray) : ByteArray {
-        return data.toBits().flatMap {
+        return data.toBits(DES_BLOCK_SIZE_BYTES).flatMap {
             decryptBlock(BitSet(it)).toBytes()
         }.toByteArray()
     }
@@ -71,6 +71,6 @@ private fun Int.formatS() = List(DES_BS_SIZE) {
     this and (1).shl(it) != 0
 }
 
-private fun BitSet.toBytes() = chunked(8) {
+fun BitSet.toBytes() = chunked(8) {
     it.mapIndexed { i, v -> v.bitValue().shl(7 - i) }.sum().toByte()
 }
