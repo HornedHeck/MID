@@ -27,13 +27,14 @@ val S_GOST = arrayOf(
 
 
 fun BitSet.mod2p32(key: BitSet) = BitSet(
-    (toUInt() + key.toUInt())
-        .mod(1U shl 32)
+    (toUInt().toULong() + key.toUInt())
+        .mod(1UL shl 32)
         .toInt()
 )
 
 fun BitSet.toUInt() = this.toBytes().let {
-    ((it[0].toUByte().toUInt() * 256U + it[1].toUByte().toUInt()) * 256U + it[2].toUByte().toUInt()) * 256U + it[3].toUByte().toUInt()
+    ((it[0].toUByte().toUInt() * 256U + it[1].toUByte().toUInt()) * 256U + it[2].toUByte()
+        .toUInt()) * 256U + it[3].toUByte().toUInt()
 }
 
 class GOST(keyRaw: ByteArray) {
@@ -53,12 +54,12 @@ class GOST(keyRaw: ByteArray) {
     }
 
     private fun encryptBlock(data: BitSet): BitSet {
-        var l = data[0, DES_CYCLE_SIZE_BITS]
-        var r = data[DES_CYCLE_SIZE_BITS, DES_BLOCK_SIZE_BITS]
-        repeat(32) {
+        var r = data[0, DES_CYCLE_SIZE_BITS]
+        var l = data[DES_CYCLE_SIZE_BITS, DES_BLOCK_SIZE_BITS]
+        for (i in 0 until 32) {
             r = l.apply {
                 l = r xor applyKey(
-                    keys[encryptKeysOrder[it]],
+                    keys[encryptKeysOrder[i]],
                     l
                 )
             }
@@ -73,8 +74,8 @@ class GOST(keyRaw: ByteArray) {
     }
 
     private fun decryptBlock(data: BitSet): BitSet {
-        var l = data[0, DES_CYCLE_SIZE_BITS]
-        var r = data[DES_CYCLE_SIZE_BITS, DES_BLOCK_SIZE_BITS]
+        var r = data[0, DES_CYCLE_SIZE_BITS]
+        var l = data[DES_CYCLE_SIZE_BITS, DES_BLOCK_SIZE_BITS]
         repeat(32) {
             r = l.apply {
                 l = r xor applyKey(
@@ -99,7 +100,7 @@ class GOST(keyRaw: ByteArray) {
                             bits[3].bitValue()
                     S_GOST[i][index].formatS()
                 }.let {
-                    it.drop(11) + it.take(11)
+                    it.takeLast(11) + it.dropLast(11)
                 }.toBooleanArray()
         )
     }

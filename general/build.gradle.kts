@@ -26,7 +26,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 dependencies {
-                    implementation(project(":general"))
                     implementation(kotlin("stdlib-common"))
                     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
                 }
@@ -35,6 +34,16 @@ kotlin {
                 dependencies {
                     implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
                     implementation("org.jetbrains.kotlin:kotlin-test-common")
+                }
+            }
+            val jvmTest by getting{
+                dependencies {
+                    implementation("org.jetbrains.kotlin:kotlin-test-junit")
+                }
+            }
+            val jsTest by getting{
+                dependencies {
+                    implementation("org.jetbrains.kotlin:kotlin-test-js")
                 }
             }
         }

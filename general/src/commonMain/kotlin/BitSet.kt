@@ -25,6 +25,8 @@ class BitSet(private val bits: BooleanArray) : List<Boolean> {
 
     fun translation(t: Array<Int>) = BitSet(t.map { bits[it] }.toBooleanArray())
 
+    fun reversed() = BitSet(bits.reversedArray())
+
     infix fun xor(b: BitSet): BitSet {
         require(b.size == size)
         return BitSet(BooleanArray(size) {

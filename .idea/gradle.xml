@@ -12,7 +12,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/general" />
             <option value="$PROJECT_DIR$/task_1" />
+            <option value="$PROJECT_DIR$/task_2" />
           </set>
         </option>
       </GradleProjectSettings>

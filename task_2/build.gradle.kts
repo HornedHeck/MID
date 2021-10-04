@@ -37,6 +37,16 @@ kotlin {
                     implementation("org.jetbrains.kotlin:kotlin-test-common")
                 }
             }
+            val jvmTest by getting{
+                dependencies {
+                    implementation("org.jetbrains.kotlin:kotlin-test-junit")
+                }
+            }
+            val jsTest by getting{
+                dependencies {
+                    implementation("org.jetbrains.kotlin:kotlin-test-js")
+                }
+            }
         }
     }
 }
