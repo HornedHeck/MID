@@ -110,7 +110,7 @@ class Md5 {
         }
     }
 
-    fun digest(msg: ByteArray): String {
+    fun digest(msg: ByteArray): List<UByte> {
         initBuffer()
         val eMsg = extendMessageToSize(msg)
         extendMessageWithLength(eMsg, msg.size)
@@ -119,12 +119,14 @@ class Md5 {
             .forEach { runBlock(it.toByteArray()) }
         return regs
             .flatMap(UInt::toUBytesBigEndian)
-            .joinToString("") {
-                it.toString(16)
-                    .uppercase()
-                    .padStart(2, '0')
-            }
     }
+
+    fun stringDigest(msg: ByteArray) = digest(msg)
+        .joinToString("") {
+            it.toString(16)
+                .uppercase()
+                .padStart(2, '0')
+        }
 
 }
 

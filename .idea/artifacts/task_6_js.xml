@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="task_6-js">
+    <output-path>$PROJECT_DIR$/task_6/build/libs</output-path>
+    <root id="archive" name="task_6-js.jar">
+      <element id="module-output" name="info_protection.task_6.jsMain" />
+    </root>
+  </artifact>
+</component>

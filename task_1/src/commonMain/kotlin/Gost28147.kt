@@ -37,7 +37,7 @@ fun BitSet.toUInt() = this.toBytes().let {
         .toUInt()) * 256U + it[3].toUByte().toUInt()
 }
 
-class GOST(keyRaw: ByteArray) {
+class Gost28147(keyRaw: ByteArray) {
 
     init {
         require(keyRaw.size == KEYS_SIZE_BYTE)

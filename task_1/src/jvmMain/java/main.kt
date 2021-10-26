@@ -1,6 +1,5 @@
 import java.io.File
 import java.nio.file.Files
-import java.nio.file.OpenOption
 import java.nio.file.StandardOpenOption
 import kotlin.io.path.Path
 
@@ -103,7 +102,7 @@ fun run3Des(data: ByteArray, keys: List<String>, direction: Boolean): ByteArray 
 }
 
 fun runGost(data: ByteArray, key: String, direction: Boolean): ByteArray {
-    val gost = GOST(key.encodeToByteArray())
+    val gost = Gost28147(key.encodeToByteArray())
 
     return if (direction) {
         gost.encrypt(data)
