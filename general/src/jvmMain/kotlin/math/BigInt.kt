@@ -74,3 +74,11 @@ fun List<BigInteger>.split(size: Int) = this
             }
     }
     .toByteArray()
+
+operator fun BigInteger.times(int: Int) = this * int.toBigInteger()
+
+fun BigInteger.safeModInverse(m: BigInteger) = if (this == BigInteger.ZERO) {
+    this
+} else {
+    modInverse(m)
+}
